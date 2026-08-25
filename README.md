@@ -5,7 +5,9 @@
 **大模型 × Android 应用落地示例 —— 端侧推理、对话式 AI、车载场景**
 
 [![Stars](https://img.shields.io/github/stars/jason5200/AI-Android-Demo?style=social)](https://github.com/jason5200/AI-Android-Demo)
+[![Forks](https://img.shields.io/github/forks/jason5200/AI-Android-Demo?style=social)](https://github.com/jason5200/AI-Android-Demo)
 [![License](https://img.shields.io/github/license/jason5200/AI-Android-Demo)](https://github.com/jason5200/AI-Android-Demo)
+[![Visitors](https://komarev.com/ghpvc/?username=jason5200&repo=AI-Android-Demo&color=blueviolet)](https://github.com/jason5200/AI-Android-Demo)
 
 </div>
 
