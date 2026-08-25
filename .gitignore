@@ -1,0 +1,22 @@
+# Android Studio / Gradle
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build/
+/captures
+.externalNativeBuild
+.cxx
+
+# 构建产物
+app/build/
+
+# 本地配置
+local.properties
+
+# 模型文件（体积大，不提交）
+*.bin
+*.onnx
+*.gguf
+*.tflite

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- AI Chat Demo 应用图标 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path
+        android:fillColor="#7c3aed"
+        android:pathData="M54,54m-54,0a54,54 0,1 1,108 0a54,54 0,1 1,-108 0" />
+
+    <!-- 对话气泡 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,40h48a8,8 0,0 1,8 8v24a8,8 0,0 1,-8 8h-28l-12,12v-12h-8a8,8 0,0 1,-8 -8v-24a8,8 0,0 1,8 -8z" />
+
+    <path
+        android:fillColor="#7c3aed"
+        android:pathData="M38,56m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0" />
+    <path
+        android:fillColor="#7c3aed"
+        android:pathData="M54,56m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0" />
+    <path
+        android:fillColor="#7c3aed"
+        android:pathData="M70,56m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0" />
+</vector>
