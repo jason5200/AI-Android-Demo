@@ -5,8 +5,16 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- 对话内容区 -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:textColor="#6B7280"
+        android:textSize="12sp" />
+
     <ScrollView
+        android:id="@+id/scrollChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -20,12 +28,11 @@
             android:textSize="16sp" />
     </ScrollView>
 
-    <!-- 输入区 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/etInput"
@@ -33,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/input_hint"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:maxLines="3" />
 
         <Button

@@ -1,0 +1,13 @@
+## 复制本文件为 local.properties（不要提交）
+## sdk.dir 按本机 Android SDK 路径填写
+
+# sdk.dir=C:\\Users\\YOU\\AppData\\Local\\Android\\Sdk
+
+## 留空则使用 Mock 流式回复。填写后走 OpenAI 兼容 Chat Completions。
+llm.api.key=
+llm.base.url=https://api.openai.com/v1
+llm.model=gpt-4o-mini
+
+## 通义兼容模式示例：
+# llm.base.url=https://dashscope.aliyuncs.com/compatible-mode/v1
+# llm.model=qwen-plus

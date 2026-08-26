@@ -1,73 +1,61 @@
 <div align="center">
 
-# AI-Android-Demo 🤖
+# AI-Android-Demo
 
-**大模型 × Android 应用落地示例 —— 端侧推理、对话式 AI、车载场景**
+**Android 对话 Demo：UI 骨架 + OpenAI 兼容流式接口**
 
-[![Stars](https://img.shields.io/github/stars/jason5200/AI-Android-Demo?style=social)](https://github.com/jason5200/AI-Android-Demo)
-[![Forks](https://img.shields.io/github/forks/jason5200/AI-Android-Demo?style=social)](https://github.com/jason5200/AI-Android-Demo)
 [![License](https://img.shields.io/github/license/jason5200/AI-Android-Demo)](https://github.com/jason5200/AI-Android-Demo)
-[![Visitors](https://komarev.com/ghpvc/?username=jason5200&repo=AI-Android-Demo&color=blueviolet)](https://github.com/jason5200/AI-Android-Demo)
 
 </div>
 
 ---
 
-## 📌 为什么有这个 Demo
+## 这个 Demo 实际有什么
 
-大模型正在进入 Android 和车机，但「怎么把 LLM 跑起来、接到 App 里」的工程示例还很少。这个仓库用**最小可运行的代码**，演示一个大模型对话 App 的骨架，配合 [AAOS-Guide](https://github.com/jason5200/AAOS-Guide) 的 AI 系列文章理解原理。
+| 有 | 没有 |
+|----|------|
+| 对话界面 + 流式追加 | 端侧 MediaPipe / llama.cpp |
+| `LlmClient` 抽象 | 车机语音 / ASR / TTS |
+| 配置 Key 后走 `chat/completions` SSE | 生产级会话存储 |
 
-## ✨ 特性
+没有 `llm.api.key` 时走 **Mock**（假流式），用来确认 UI 链路。配上 Key 后走真实 HTTP，兼容 OpenAI 以及通义 `compatible-mode` 等。
 
-- ✅ 对话式聊天界面（消息列表 + 输入框）
-- ✅ 抽象了 LLM 推理接口（可接入 MediaPipe / llama.cpp / 云端 API）
-- ✅ 演示流式输出（逐 token 显示）
-- ✅ 清晰的 TODO 标注，方便你替换成自己的模型
+原理文章：[AAOS-Guide · 端侧推理](https://github.com/jason5200/AAOS-Guide/blob/main/05-ai-integration/on-device-llm.md)
 
-## 🗂️ 目录结构
+## 快速开始
 
-```
-AI-Android-Demo/
-├── README.md
-├── build.gradle
-├── settings.gradle
-└── app/
-    ├── build.gradle
-    └── src/main/
-        ├── AndroidManifest.xml
-        ├── java/com/jason/aichat/
-        │   ├── MainActivity.kt        # 对话界面 + 流式输出
-        │   └── LlmClient.kt           # LLM 推理接口抽象
-        └── res/
-            ├── layout/activity_main.xml
-            ├── values/strings.xml
-            └── drawable/ic_launcher.xml
+1. 用 Android Studio 打开本工程，或命令行：
+
+```bash
+./gradlew assembleDebug
 ```
 
-## 🚀 快速开始
+2. （可选）把 `local.properties.example` 复制为 `local.properties`，填 SDK 路径和密钥：
 
-1. 用 Android Studio 打开本工程。
-2. 按需接入推理后端（三种方式任选）：
+```
+sdk.dir=...你的 Android SDK...
+llm.api.key=sk-...
+llm.base.url=https://api.openai.com/v1
+llm.model=gpt-4o-mini
+```
 
-| 方式 | 说明 | 适合 |
-|------|------|------|
-| MediaPipe LLM | Google 官方，Android 友好 | 快速验证端侧 |
-| llama.cpp | 跑 Llama 系量化模型 | 追求端侧性能 |
-| 云端 API | 调用 OpenAI/通义等 | 最简单，无本地模型 |
+3. 运行 app。顶栏会显示当前是 Mock 还是真实后端。
 
-3. 运行 app，开始对话。
+`local.properties` 已在 `.gitignore`，不要把 Key 提交上去。
 
-## 📚 关联文章
+## 代码结构
 
-| 文章 | 位置 |
-|------|------|
-| 《大模型上车：端侧推理的可行方案》 | [AAOS-Guide/05-ai-integration](https://github.com/jason5200/AAOS-Guide) |
-| 《车载语音助手：从 ASR 到 LLM》 | AAOS-Guide/05-ai-integration |
+```
+app/src/main/java/com/jason/aichat/
+├── MainActivity.kt                  # 对话 UI
+├── LlmClient.kt                     # 接口 + Mock
+└── OpenAiCompatibleLlmClient.kt     # OpenAI 兼容 SSE
+```
 
-## 🤝 参与共建
+## 参与共建
 
-欢迎 PR 补充：MediaPipe 接入示例、llama.cpp 接入示例、车机语音场景。
+欢迎 PR：MediaPipe 端侧实现、llama.cpp 绑定、把 Mock 换成可切换的多后端。流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
-## 📄 License
+## License
 
 [Apache-2.0](LICENSE) © [jason5200](https://github.com/jason5200)

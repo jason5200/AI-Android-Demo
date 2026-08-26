@@ -1,43 +1,52 @@
 package com.jason.aichat
 
 /**
- * LLM 推理接口抽象。
+ * LLM 推理接口。UI 只依赖这个接口。
  *
- * 屏蔽具体推理后端（MediaPipe / llama.cpp / 云端 API），
- * 让 UI 层只依赖这个接口。
+ * 实现：
+ * - [MockLlmClient]：无 Key 时的本地假流式，用来跑通界面
+ * - [OpenAiCompatibleLlmClient]：OpenAI / 通义 compatible-mode 等 `/chat/completions` 流式接口
  */
 interface LlmClient {
+
+    /** 当前后端说明，用于界面状态栏。 */
+    val backendLabel: String
 
     /**
      * 流式生成回复。
      *
-     * @param prompt     用户输入
-     * @param onToken    每生成一个 token 回调一次
-     * @return 完整回复文本
+     * @param prompt 用户输入
+     * @param onToken 每个增量回调一次（可能是单字或一小段）
+     * @return 完整回复
      */
     suspend fun generate(prompt: String, onToken: (String) -> Unit): String
 
     companion object {
-        /**
-         * 创建一个演示用的假实现（无真实模型）。
-         * 替换真实模型时，只需换掉这里的实现。
-         */
-        fun createMock(): LlmClient = MockLlmClient()
+        fun create(): LlmClient {
+            val key = BuildConfig.LLM_API_KEY.trim()
+            if (key.isEmpty()) {
+                return MockLlmClient()
+            }
+            return OpenAiCompatibleLlmClient(
+                baseUrl = BuildConfig.LLM_BASE_URL,
+                apiKey = key,
+                model = BuildConfig.LLM_MODEL
+            )
+        }
     }
 }
 
-/**
- * 演示实现：模拟流式输出，用于跑通 UI 链路。
- * 接入真实模型时，替换为 MediaPipe / llama.cpp / 云端 API 的实现。
- */
+/** 无真实模型：只验证输入 → 流式展示 → 收尾。 */
 private class MockLlmClient : LlmClient {
+
+    override val backendLabel: String = "Mock（未配置 llm.api.key）"
+
     override suspend fun generate(prompt: String, onToken: (String) -> Unit): String {
         val reply = "这是对「$prompt」的演示回复。\n" +
-            "接入真实 LLM 后，这里会返回模型生成的回答。"
-        // 模拟逐字输出，展示流式效果
+            "在项目根目录 local.properties 写入 llm.api.key 后，会走 OpenAI 兼容接口。"
         reply.forEach { char ->
             onToken(char.toString())
-            kotlinx.coroutines.delay(30)
+            kotlinx.coroutines.delay(20)
         }
         return reply
     }
