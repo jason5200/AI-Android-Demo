@@ -4,6 +4,7 @@
 
 **Android 对话 Demo：UI 骨架 + OpenAI 兼容流式接口**
 
+[![CI](https://github.com/jason5200/AI-Android-Demo/actions/workflows/ci.yml/badge.svg)](https://github.com/jason5200/AI-Android-Demo/actions)
 [![License](https://img.shields.io/github/license/jason5200/AI-Android-Demo)](https://github.com/jason5200/AI-Android-Demo)
 
 </div>
